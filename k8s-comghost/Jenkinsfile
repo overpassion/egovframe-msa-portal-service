@@ -12,7 +12,7 @@ podTemplate(
 ) {
     node(POD_LABEL) {
         def now = java.time.LocalDateTime.now()
-        def projectId = "reserve-check-service" // 프로젝트 아이디
+        def projectId = "portal-service" // 프로젝트 아이디
 
         // docker
         def dockerhubCredentialsId = "username-password-dockerhub" // 젠킨스 도커허브 자격증명
