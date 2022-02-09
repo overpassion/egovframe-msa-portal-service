@@ -16,7 +16,7 @@ podTemplate(
 
         // docker
         def dockerhubCredentialsId = "username-password-dockerhub" // 젠킨스 도커허브 자격증명
-        def dockerImage = "egovframe/egovframe-msa-edu-backend-${projectId}" // 도커허브 이미지
+        def dockerImage = "overpassion/egovframe-msa-edu-backend-${projectId}" // 도커허브 이미지
         def dockerImageTag = "latest" // 도커허브 이미지 태그
 
         stage("git") {
