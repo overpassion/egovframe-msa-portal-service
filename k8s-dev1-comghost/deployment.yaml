@@ -77,6 +77,11 @@ spec:
                 configMapKeyRef:
                   name: backend-configmap
                   key: ZIPKIN_HOSTNAME
+            - name: LOGSTASH_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-configmap
+                  key: LOGSTASH_URL
           startupProbe:
             httpGet:
               path: /actuator/health
