@@ -72,6 +72,11 @@ spec:
                 configMapKeyRef:
                   name: backend-configmap
                   key: RABBITMQ_HOSTNAME
+            - name: ZIPKIN_HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-configmap
+                  key: ZIPKIN_HOSTNAME
           startupProbe:
             httpGet:
               path: /actuator/health
