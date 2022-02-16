@@ -62,6 +62,11 @@ spec:
                 configMapKeyRef:
                   name: backend-configmap
                   key: SPRING_CLOUD_CONFIG_URI
+            - name: MYSQL_HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-configmap
+                  key: MYSQL_HOSTNAME
           startupProbe:
             httpGet:
               path: /actuator/health
