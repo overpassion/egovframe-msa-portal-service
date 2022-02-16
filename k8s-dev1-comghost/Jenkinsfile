@@ -16,8 +16,8 @@ podTemplate(
 
         // docker
         def dockerhubCredentialsId = "username-password-dockerhub" // 젠킨스 도커허브 자격증명
-        def dockerImage = "overpassion/egovframe-msa-edu-backend-${projectId}" // 도커허브 이미지
-        def dockerImageTag = "latest" // 도커허브 이미지 태그
+        def dockerImage = "overpassion/egovframe-msa-backend-${projectId}" // 도커허브 이미지
+        def dockerImageTag = "k8s" // 도커허브 이미지 태그
 
         stage("git") {
             checkout scm
@@ -32,7 +32,7 @@ podTemplate(
             container("docker") {
                 withCredentials([usernamePassword(credentialsId: "${dockerhubCredentialsId}", passwordVariable: "password", usernameVariable: "username")]) {
                     sh "docker login -u $username -p $password"
-                    sh "docker build -f DockerfileK8s -t ${dockerImage}:${dockerImageTag} ."
+                    sh "docker build -f ./k8s-dev1-comghost/Dockerfile -t ${dockerImage}:${dockerImageTag} ."
                     sh "docker push ${dockerImage}:${dockerImageTag}"
                 }
             }
@@ -40,7 +40,7 @@ podTemplate(
 
         stage( "kubernetes" ) {
             container("kubectl") {
-                sh "kubectl rollout restart deployment ${projectId}-deployment || kubectl apply -f ./k8s-comghost"
+                sh "kubectl rollout restart deployment ${projectId}-deployment || kubectl apply -f ./k8s-dev1-comghost"
                 sh "kubectl annotate deployment.apps/${projectId}-deployment kubernetes.io/change-cause='Image updated at ${now} by ${env.BUILD_TAG}.'"
             }
         }
