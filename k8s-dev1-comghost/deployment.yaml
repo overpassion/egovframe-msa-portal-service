@@ -67,6 +67,11 @@ spec:
                 configMapKeyRef:
                   name: backend-configmap
                   key: MYSQL_HOSTNAME
+            - name: RABBITMQ_HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-configmap
+                  key: RABBITMQ_HOSTNAME
           startupProbe:
             httpGet:
               path: /actuator/health
